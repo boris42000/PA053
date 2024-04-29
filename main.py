@@ -22,7 +22,7 @@ def service():
         response = requests.get(url,  headers=headers)
         data = response.json()
         print(data)
-        json = {"temperature": data['current']['temp_c']}
+        json = {"result": data['current']['temp_c']}
         
     
     elif 'queryStockPrice' in request.args:
@@ -36,7 +36,7 @@ def service():
         response = requests.get(url, headers=headers)
         data = response.json()
         print(data)
-        json = {"stock_price": data['price']['regularMarketPrice']['raw']} 
+        json = {"result": data['price']['regularMarketPrice']['raw']} 
 
     elif 'queryEval' in request.args:
         expression = request.args['queryEval']

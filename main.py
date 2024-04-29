@@ -48,7 +48,7 @@ def service():
         json = {"result": result}
     else:
         return make_response("Invalid request", 400)
-    return make_response(jsonify(json), 200, {'Content-Type': 'application/json'})
+    return make_response(json, 200, {'Content-Type': 'application/json'})
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)

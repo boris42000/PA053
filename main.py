@@ -21,8 +21,7 @@ def service():
         url = f"https://weatherapi-com.p.rapidapi.com/current.json?q=iata:{code}"
         response = requests.get(url,  headers=headers)
         data = response.json()
-        print(data)
-        json = {"result": data['current']['temp_c']}
+        result =  data['current']['temp_c']
         
     
     elif 'queryStockPrice' in request.args:
@@ -35,8 +34,7 @@ def service():
         url = f"https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol={symbol}"
         response = requests.get(url, headers=headers)
         data = response.json()
-        print(data)
-        json = {"result": data['price']['regularMarketPrice']['raw']} 
+        result =  data['price']['regularMarketPrice']['raw'] 
 
     elif 'queryEval' in request.args:
         expression = request.args['queryEval']
@@ -45,10 +43,10 @@ def service():
             result = float(expr.evalf())
         except Exception as e:
             result = str(e)
-        json = {"result": result}
+        json = result
     else:
         return make_response("Invalid request", 400)
-    return make_response(json, 200, {'Content-Type': 'application/json'})
+    return make_response(f'<result>{result}</result>', 200, {'Content-Type': 'application/xml'})
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)

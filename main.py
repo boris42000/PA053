@@ -9,23 +9,33 @@ API_KEY = 'b6f45c5a99msh9c8e584ecba5a6fp15609ajsnb0e6d595e3f4'
 
 @app.route('/', methods=['GET'])
 def service():
-    headers = {
-                'x-rapidapi-key': API_KEY,
-                'Accept': 'application/json'
-               }
+   
     
     if 'queryAirportTemp' in request.args:
         code = request.args['queryAirportTemp']
-        url = f"https://api.weatherapi.com/v1/current.json?q=iata:{code}"
+        headers = {
+            'x-rapidapi-key': 'b6f45c5a99msh9c8e584ecba5a6fp15609ajsnb0e6d595e3f4',
+            'Accept': 'application/json',
+            'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+            }
+        url = f"https://weatherapi-com.p.rapidapi.com/current.json?q=iata:{code}"
         response = requests.get(url,  headers=headers)
         data = response.json()
+        print(data)
         json = {"temperature": data['current']['temp_c']}
+        
     
     elif 'queryStockPrice' in request.args:
         symbol = request.args['queryStockPrice']
+        headers = {
+            'x-rapidapi-key': 'b6f45c5a99msh9c8e584ecba5a6fp15609ajsnb0e6d595e3f4',
+            'Accept': 'application/json',
+            'X-RapidAPI-Host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+            }
         url = f"https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbols={symbol}"
         response = requests.get(url, headers=headers)
         data = response.json()
+        print(data)
         json = {"stock_price": data['price']['regularMarketPrice']['raw']} 
 
     elif 'queryEval' in request.args:

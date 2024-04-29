@@ -43,7 +43,7 @@ def service():
             result = float(expr.evalf())
         except Exception as e:
             result = str(e)
-        json = result
+        result = result
     else:
         return make_response("Invalid request", 400)
     return make_response(f'<result>{result}</result>', 200, {'Content-Type': 'application/xml'})

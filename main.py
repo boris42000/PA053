@@ -32,7 +32,7 @@ def service():
             'Accept': 'application/json',
             'X-RapidAPI-Host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
             }
-        url = f"https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbols={symbol}"
+        url = f"https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol={symbol}"
         response = requests.get(url, headers=headers)
         data = response.json()
         print(data)

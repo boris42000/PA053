@@ -16,7 +16,7 @@ def service():
     
     if 'queryAirportTemp' in request.args:
         code = request.args['queryAirportTemp']
-        url = f"https://api.weatherapi.com/v1/current.json?iata=:{code}"
+        url = f"https://api.weatherapi.com/v1/current.json?q=iata:{code}"
         response = requests.get(url,  headers=headers)
         data = response.json()
         json = {"temperature": data['current']['temp_c']}
